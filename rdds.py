@@ -12,7 +12,8 @@ values, counts = np.unique(ratings.collect(), return_counts=True)
 for k, v in zip(values, counts):
   #  print(f'{k}: {v}')
     pass
- 
+
+  
 #COMMAND
 from pyspark import SparkConf, SparkContext
 
