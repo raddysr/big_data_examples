@@ -12,7 +12,6 @@ values, counts = np.unique(ratings.collect(), return_counts=True)
 for k, v in zip(values, counts):
   #  print(f'{k}: {v}')
     pass
-
   
 #COMMAND
 from pyspark import SparkConf, SparkContext
@@ -32,6 +31,8 @@ for k in sorted(dict_average_age):
     #print(k,':', dict_average_age[k])
     pass
   
+  
+  
 #COMMAND
 from pyspark import SparkConf, SparkContext
 
@@ -46,6 +47,8 @@ min_find = stationTemps.reduceByKey(lambda x,y: min(x,y))
 results = min_find.collect()
 print("{:.2f}".format(results[0][1] * 0.1 * (9.0/5.0) +32),"F", sep='')
 print("{:.2f}".format(results[1][1] * 0.1 * (9.0/5.0) +32),"F", sep='')
+
+
 
 #COMMAND
 from pyspark import SparkConf, SparkContext
@@ -77,6 +80,8 @@ for word, count in word_counts.items():
     if clean_word:
         print(clean_word, count)
 print(len(flat_parsed_lines.collect()))
+
+
 
 #COMMAND
 
