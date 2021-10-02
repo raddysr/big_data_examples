@@ -104,3 +104,19 @@ words_count_sorted = words_count.map(lambda x: (x[1],x[0])).sortByKey()
 results = words_count_sorted.collect()
 for result in results:
     pass#    print(result)
+
+  
+#COMMAND
+from pyspark import SparkConf, SparkContext
+
+#conf = SparkConf().setMaster('local').setAppName('TotalAmountSpentByCustomer')
+#sc = SparkConf(conf=conf)
+
+input_file = sc.textFile('/home/raddy/customer-orders.csv')
+cust_amounts = input_file.map(lambda x:(x.split(',')[0], float(x.split(',')[2])))
+cust_amounts_sums = cust_amounts.reduceByKey(lambda x,y: x+y)
+
+sorted_cust_amounts_sums = cust_amounts_sums.map(lambda x: (x[1], x[0])).sortByKey()
+
+for cust_amounts_sum in sorted_cust_amounts_sums.collect():
+    print(f"Customer {cust_amounts_sum[1]} spends {'{:.2f}'.format(cust_amounts_sum[0])}$")
