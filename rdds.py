@@ -78,5 +78,24 @@ for word, count in word_counts.items():
         print(clean_word, count)
 print(len(flat_parsed_lines.collect()))
 
-  
-  
+#COMMAND
+
+import re
+from pyspark import SparkConf, SparkContext
+
+#conf = SparkConf().setMaster('local').setAppName("FriendsByAge")
+#sc = SparkContext(conf=conf)
+
+def normalize_words(text):
+    return re.compile(r'\W+', re.UNICODE).split(text.lower())
+
+input_file = sc.textFile('file:/home/radi/sundog_spark/ml-100k/book.txt')
+rdd_book = input_file.flatMap(normalize_words)
+words_count = rdd_book.map(lambda x: (x,1)).reduceByKey(lambda x, y: x+y)
+
+words_count_sorted = words_count.map(lambda x: (x[1],x[0])).sortByKey()
+
+
+results = words_count_sorted.collect()
+for result in results:
+    pass#    print(result)
