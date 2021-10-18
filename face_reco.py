@@ -54,3 +54,4 @@ for filename in os.listdir(UNKNOWN_FACES_DIR):
     cv2.waitKey(0)
     cv2.destroyWindow(filename)
 
+    #thanks to pythonprogramming.net/
