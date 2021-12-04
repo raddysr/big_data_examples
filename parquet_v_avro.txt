@@ -1,0 +1,9 @@
+Avro - raw based
+Parquet - columnar based
+
+-both using differnet types of compression for quick responce, space optimization etc.
+
+Parquet - optimized for analytical querying(read intensive). Supports only append operations
+
+Avro - write optimized
+
